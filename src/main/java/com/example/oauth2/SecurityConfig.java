@@ -1,7 +1,6 @@
 package com.example.oauth2;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -17,10 +16,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((authorize) -> authorize.requestMatchers("/secret/**").hasRole("USER")
-                .anyRequest().denyAll())
+        http.authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())
                 .formLogin(Customizer.withDefaults());
-
+        
         return http.build();
     }
 
