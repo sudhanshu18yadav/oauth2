@@ -1,8 +1,6 @@
 package com.example.oauth2;
 
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +28,7 @@ public class ForestController {
     }
 
     @GetMapping("/zoo")
-    public String pageB() {
-        return "hello from zoo";
+    public String pageB(Authentication auth) {
+        return "thei is password ::"+auth.getJks().getPassword().toString();
     }
 }
