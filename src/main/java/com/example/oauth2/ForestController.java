@@ -1,6 +1,6 @@
 package com.example.oauth2;
 
-import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Authentication;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ForestController {
 
     @GetMapping("/")
-    public String hello() {
-        return "hello world";
+    public String hello(Authentication authentication) {
+        return "Hello, " + authentication.getName() + "!";
     }
 
     @GetMapping("/page-a")
@@ -27,8 +27,8 @@ public class ForestController {
         return "from secret 2";
     }
 
-    @GetMapping("/zoo")
-    public String pageB(Authentication auth) {
-        return "thei is password ::"+auth.getJks().getPassword().toString();
-    }
+    // @GetMapping("/zoo")
+    // public String pageB(Authentication auth) {
+    //     return "thei is password ::" + auth.getJks().getPassword().toString();
+    // }
 }
